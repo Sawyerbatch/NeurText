@@ -3,62 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chiedi a Gemini</title>
+  <title>Chatbot – NeurText</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
       background: #f9f9f9;
-      text-align: center;
+      color: #222;
     }
+
+    .header {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-group img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-group span {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: #ff3baf;
+    }
+
+    .main {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
     input, button {
-      padding: 10px;
+      padding: 12px;
+      font-size: 18px;
+      max-width: 500px;
       width: 80%;
-      max-width: 400px;
       margin: 10px auto;
       display: block;
-      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
-    #response {
-      margin-top: 30px;
-      padding: 20px;
-      background: #fff;
-      border: 1px solid #ddd;
+
+    button {
+      background: #ff3baf;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff7e1a;
+    }
+
+    .response {
+      background: white;
+      padding: 24px;
+      margin-top: 20px;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-inline: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
+
+    .hero {
+        min-height: 100vh;
+        background: url('https://neurtext.ct.ws/wp-content/uploads/2025/05/background.png') no-repeat center top / cover fixed;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+      }
+      
+    .hero-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    padding: 80px 20px;
+    }
+
   </style>
 </head>
 <body>
-  <h1>Chiedi a Gemini ✨</h1>
-  <input type="text" id="question" placeholder="Scrivi una domanda...">
-  <button onclick="askGemini()">Invia</button>
-  <div id="response"></div>
 
-  <script>
+<div class="header">
+    <div class="container">
+    <div class="logo-group">
+        <img src="https://neurtext.ct.ws/wp-content/uploads/2025/05/logo-1.png" alt="logo">
+        <span>NeurText</span>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="chatbot.html">Gemini Chatbot</a>
+    </div>
+    </div>
+</div>
+
+<!-- Hero section con sfondo -->
+<div class="hero">
+    <div class="hero-overlay">
+    <div class="main">
+        <h1>Chiedi a Gemini ✨</h1>
+        <input type="text" id="question" placeholder="Scrivi una domanda...">
+        <button onclick="askGemini()">Invia</button>
+        <div class="response" id="responseBox"></div>
+    </div>
+    </div>
+</div>
+
+<script>
     async function askGemini() {
-      const question = document.getElementById("question").value;
-      const responseBox = document.getElementById("response");
-      responseBox.innerHTML = "Attendi...";
+    const question = document.getElementById("question").value;
+    const responseBox = document.getElementById("responseBox");
+    responseBox.innerHTML = "⏳ Attendi...";
 
-      try {
+    try {
         const res = await fetch("https://neurtext-api.onrender.com/api/gemini", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ question })
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question })
         });
 
         const data = await res.json();
         if (data.reply) {
-          responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply}`;
+        responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply}`;
         } else {
-          responseBox.innerHTML = "Errore nella risposta 😞";
+        responseBox.innerHTML = "❌ Errore nella risposta.";
         }
-      } catch (err) {
-        responseBox.innerHTML = "Errore di rete o server non disponibile.";
-      }
+    } catch (err) {
+        responseBox.innerHTML = "🚫 Errore di rete o server non disponibile.";
     }
-  </script>
+    }
+</script>
+
 </body>
 </html>

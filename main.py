@@ -5,7 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI()
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, 
+                   allow_origins=["*"], 
+                   allow_credentials=True, # 👈 NECESSARIO per fixare CORS nei browser
+                   allow_methods=["*"], 
+                   allow_headers=["*"])    
 
 # Sostituisci con la tua chiave o caricala da environment
 API_KEY = os.getenv("GEMINI_API_KEY")

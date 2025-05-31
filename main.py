@@ -42,12 +42,15 @@ def ask_gemini(payload: Query):
 
     print(result)  # Debug nei log di Render
 
+    print("GEMINI RAW RESPONSE:", result)
+
     try:
         return {
             "reply": result["candidates"][0]["content"]["parts"][0]["text"]
         }
-    except:
-        return {"error": "No valid response from Gemini.", "raw": result}
+    except Exception as e:
+        return {"error": str(e), "raw": result}
+
 
 @app.get("/")
 def ping():

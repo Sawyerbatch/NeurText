@@ -1,19 +1,20 @@
 import os
 import requests
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 app = FastAPI()
-app.add_middleware(CORSMiddleware, 
-                   allow_origins=["*"], 
-                   allow_credentials=True, # 👈 NECESSARIO per fixare CORS nei browser
-                   allow_methods=["*"], 
-                   allow_headers=["*"])    
 
-# Sostituisci con la tua chiave o caricala da environment
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,  # 👈 FIX CORS per GitHub Pages
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 API_KEY = os.getenv("GEMINI_API_KEY")
-
 
 class Query(BaseModel):
     question: str
@@ -37,12 +38,12 @@ def ask_gemini(payload: Query):
 
     response = requests.post(url, headers=headers, json=data)
     result = response.json()
-    
-    print(result)  # 👈 AGGIUNGI QUESTO
+
+    print(result)  # Debug nei log di Render
 
     try:
         return {
             "reply": result["candidates"][0]["content"]["parts"][0]["text"]
         }
     except:
-        return {"error": "No valid response from Gemini."}
+        return {"error": "No valid response from Gemini.", "raw": result}

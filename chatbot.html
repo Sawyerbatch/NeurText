@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chiedi a Gemini</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      margin: 10px auto;
+      display: block;
+      font-size: 16px;
+    }
+    #response {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chiedi a Gemini ✨</h1>
+  <input type="text" id="question" placeholder="Scrivi una domanda...">
+  <button onclick="askGemini()">Invia</button>
+  <div id="response"></div>
+
+  <script>
+    async function askGemini() {
+      const question = document.getElementById("question").value;
+      const responseBox = document.getElementById("response");
+      responseBox.innerHTML = "Attendi...";
+
+      try {
+        const res = await fetch("https://neurtext-api.onrender.com/api/gemini", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question })
+        });
+
+        const data = await res.json();
+        if (data.reply) {
+          responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply}`;
+        } else {
+          responseBox.innerHTML = "Errore nella risposta 😞";
+        }
+      } catch (err) {
+        responseBox.innerHTML = "Errore di rete o server non disponibile.";
+      }
+    }
+  </script>
+</body>
+</html>

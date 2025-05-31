@@ -9,7 +9,7 @@ app = FastAPI()
 # CORS middleware CORRETTO e COMPLETO
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # o specifica il tuo dominio GitHub Pages
+    allow_origins=["https://sawyerbatch.github.io"], #allow_origins=["*"],  # o specifica il tuo dominio GitHub Pages
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]

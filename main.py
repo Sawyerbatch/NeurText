@@ -48,3 +48,7 @@ def ask_gemini(payload: Query):
         }
     except:
         return {"error": "No valid response from Gemini.", "raw": result}
+
+@app.get("/")
+def ping():
+    return {"message": "ok"}

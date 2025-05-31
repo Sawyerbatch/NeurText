@@ -33,6 +33,8 @@ def ask_gemini(payload: Query):
 
     response = requests.post(url, headers=headers, json=data)
     result = response.json()
+    
+    print(result)  # 👈 AGGIUNGI QUESTO
 
     try:
         return {

@@ -7,9 +7,24 @@ import requests
 app = FastAPI()
 
 # CORS middleware CORRETTO e COMPLETO
+#app.add_middleware(
+#   CORSMiddleware,
+#   allow_origins=["https://sawyerbatch.github.io"], #allow_origins=["*"],  # o specifica il tuo dominio GitHub Pages
+#   allow_credentials=True,
+#   allow_methods=["*"],
+#   allow_headers=["*"]
+#)
+
+origins = [
+    "https://sawyerbatch.github.io",
+    "https://sawyerbatch.github.io/NeurText",  # importante!
+    "http://localhost:5500",  # utile per test locali
+    "http://127.0.0.1:5500"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://sawyerbatch.github.io"], #allow_origins=["*"],  # o specifica il tuo dominio GitHub Pages
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]

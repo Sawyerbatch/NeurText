@@ -1,15 +1,16 @@
-import os
-import requests
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import os
+import requests
 
 app = FastAPI()
 
+# CORS middleware CORRETTO e COMPLETO
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,  # 👈 FIX CORS per GitHub Pages
+    allow_origins=["*"],  # o specifica il tuo dominio GitHub Pages
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )

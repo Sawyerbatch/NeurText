@@ -16,7 +16,7 @@ app.add_middleware(
 )
 
 API_KEY = os.getenv("GEMINI_API_KEY")
-
+print("USING API KEY:", API_KEY)
 class Query(BaseModel):
     question: str
 

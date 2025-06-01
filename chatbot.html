@@ -157,7 +157,9 @@
     responseBox.innerHTML = "⏳ Attendi...";
 
     try {
-        const res = await fetch("https://corsproxy.io/?https://neurtext-api.onrender.com/api/gemini", {
+        //const res = await fetch("https://corsproxy.io/?https://neurtext-api.onrender.com/api/gemini", {
+        const res = await fetch("https://neurtext-api.onrender.com/api/gemini", {
+
         method: "POST",
         headers: {
             "Content-Type": "application/json"

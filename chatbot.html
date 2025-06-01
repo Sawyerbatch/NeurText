@@ -151,34 +151,32 @@
 </div>
 
 <script>
-    async function askGemini() {
+  async function askGemini() {
     const question = document.getElementById("question").value;
     const responseBox = document.getElementById("responseBox");
     responseBox.innerHTML = "⏳ Attendi...";
 
     try {
-        //const res = await fetch("https://corsproxy.io/?https://neurtext-api.onrender.com/api/gemini", {
-        const res = await fetch("https://corsproxy.io/?https://neurtext.onrender.com/api/gemini", {
-
-        //const res = await fetch("https://neurtext-api.onrender.com/api/gemini", {
-
+      const res = await fetch("https://neurtext.onrender.com/api/gemini", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ question })
-        });
+      });
 
-        const data = await res.json();
-        if (data.reply) {
+      const data = await res.json();
+      console.log("DATA RICEVUTA:", data);  // <--- aggiunto
+      if (data.reply) {
         responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply}`;
-        } else {
+      } else {
         responseBox.innerHTML = "❌ Errore nella risposta.";
-        }
+      }
     } catch (err) {
-        responseBox.innerHTML = "🚫 Errore di rete o server non disponibile.";
+      console.error("ERRORE FETCH:", err);  // <--- aggiunto
+      responseBox.innerHTML = "🚫 Errore di rete o server non disponibile.";
     }
-    }
+  }
 </script>
 
 </body>

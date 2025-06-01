@@ -168,7 +168,7 @@
       const data = await res.json();
       console.log("DATA RICEVUTA:", data);  // <--- aggiunto
       if (data.reply) {
-        responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply}`;
+        responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply.trim().replace(/\n/g, "<br>")}`;
       } else {
         responseBox.innerHTML = "❌ Errore nella risposta.";
       }

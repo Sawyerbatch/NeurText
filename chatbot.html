@@ -152,8 +152,15 @@
 
 <script>
   async function askGemini() {
-    const question = document.getElementById("question").value;
+    const questionInput = document.getElementById("question");
+    const question = questionInput.value.trim();
     const responseBox = document.getElementById("responseBox");
+
+    if (!question) {
+      responseBox.innerHTML = "⚠️ Scrivi qualcosa prima di inviare.";
+      return;
+    }
+
     responseBox.innerHTML = "⏳ Attendi...";
 
     try {
@@ -166,14 +173,18 @@
       });
 
       const data = await res.json();
-      console.log("DATA RICEVUTA:", data);  // <--- aggiunto
+      console.log("DATA RICEVUTA:", data);
+
       if (data.reply) {
-        responseBox.innerHTML = `<strong>Risposta:</strong><br>${data.reply.trim().replace(/\n/g, "<br>")}`;
+        const formatted = data.reply.trim().replace(/\n/g, "<br>");
+        responseBox.innerHTML = `<strong>Risposta:</strong><br>${formatted}`;
+        responseBox.scrollIntoView({ behavior: "smooth" });
+        questionInput.value = ""; // reset input
       } else {
         responseBox.innerHTML = "❌ Errore nella risposta.";
       }
     } catch (err) {
-      console.error("ERRORE FETCH:", err);  // <--- aggiunto
+      console.error("ERRORE FETCH:", err);
       responseBox.innerHTML = "🚫 Errore di rete o server non disponibile.";
     }
   }

@@ -70,3 +70,7 @@ def ask_gemini(payload: Query):
 @app.get("/")
 def ping():
     return {"message": "ok"}
+
+@app.get("/debug")
+def debug():
+    return {"routes": [r.path for r in app.routes]}

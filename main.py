@@ -40,7 +40,8 @@ def ask_gemini(payload: Query):
     headers = {
         "Content-Type": "application/json"
     }
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={API_KEY}"
+    url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro-002:generateContent?key={API_KEY}"
+
 
     data = {
         "contents": [

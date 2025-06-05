@@ -2,18 +2,12 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import faiss
-import numpy as np
 import pandas as pd
-import os
+import numpy as np
+import faiss
 from sentence_transformers import SentenceTransformer
-import uvicorn
-
-# Load config paths
-EMBEDDINGS_PATH = "data/embeddings.npy"
-INDEX_PATH = "data/faiss_index.faiss"
-DATA_PATH = "data/processed_records.parquet"
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+import yaml
+import os
 
 app = FastAPI()
 
@@ -32,21 +26,31 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load everything once at startup
+# Load configuration from YAML
+with open("config.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
+# Extract paths from config
+paths = config["paths"]
+data_path = paths["processed_data"]
+embedding_path = paths["embeddings"]
+index_path = paths["faiss_index"]
+
+# Load resources
 print("Loading data and models...")
 try:
-    df_articles = pd.read_parquet(DATA_PATH)
-    embeddings = np.load(EMBEDDINGS_PATH).astype(np.float32)
-    index = faiss.read_index(INDEX_PATH)
-    model = SentenceTransformer(MODEL_NAME)
-    print("Loaded all resources successfully.")
+    df_articles = pd.read_parquet(data_path)
+    embeddings = np.load(embedding_path).astype(np.float32)
+    index = faiss.read_index(index_path)
+    model = SentenceTransformer(config["embedding_model"]["name"])
+    print("Resources loaded successfully.")
 except Exception as e:
     print(f"Failed to load one or more components: {e}")
     raise e
 
 class SearchQuery(BaseModel):
     query: str
-    top_k: int = 5
+    top_k: int = config["app_settings"].get("default_top_k", 5)
 
 @app.post("/api/semantic-search")
 def semantic_search(payload: SearchQuery):
@@ -54,7 +58,9 @@ def semantic_search(payload: SearchQuery):
         raise HTTPException(status_code=400, detail="Query cannot be empty")
 
     try:
-        query_embedding = model.encode([payload.query])[0].astype(np.float32)
+        query_prefix = config["embedding_model"].get("query_prefix", "")
+        full_query = query_prefix + payload.query
+        query_embedding = model.encode([full_query])[0].astype(np.float32)
         D, I = index.search(np.expand_dims(query_embedding, axis=0), payload.top_k)
 
         results = []
@@ -76,6 +82,3 @@ def semantic_search(payload: SearchQuery):
 @app.get("/")
 def root():
     return {"status": "Semantic Search API online"}
-
-if __name__ == "__main__":
-    uvicorn.run("semantic_api:app", host="0.0.0.0", port=8000, reload=True)

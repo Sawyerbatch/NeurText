@@ -5,3 +5,4 @@ numpy
 faiss-cpu
 sentence-transformers
 scikit-learn
+pyarrow   # 👈 necessario per leggere .parquet

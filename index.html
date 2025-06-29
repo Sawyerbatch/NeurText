@@ -1,251 +1,68 @@
-<!-- NEURTEXT – Homepage Full Layout -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NeurText – Homepage</title>
 
-<!-- Orbitron: font tech futuristico -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Orbitron font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
-<style>
-  html, body {
-    overflow-x: hidden !important;
-    margin: 0;
-    padding: 0;
-    font-family: 'Orbitron', sans-serif;
-    background: #fff;
-    color: #222;
-  }
+  <!-- CSS unificato -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  :root {
-    --color-dark: #0a0a0a;
-    --color-logo-blue: #00f0ff;
-    --color-logo-pink: #ff3baf;
-    --color-logo-orange: #ff7e1a;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* HEADER */
-  .header {
-    background: var(--color-dark);
-    color: #fff;
-    padding: 16px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-
-  .header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .logo-group img {
-    width: 56px;
-    height: 56px;
-  }
-
-  .logo-group span {
-    font-size: 26px;
-    font-weight: 700;
-    color: #ffffff;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 24px;
-  }
-
-  .nav-links a {
-    color: #bbb;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-
-  .nav-links a:hover {
-    color: var(--color-logo-pink);
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: url('https://neurtext.ct.ws/wp-content/uploads/2025/05/background.png') no-repeat center top / cover fixed;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 20px;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 0;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    color: #fff;
-  }
-
-  .hero h1 {
-    font-size: 4.2rem;
-    margin-bottom: 24px;
-    background: linear-gradient(90deg, var(--color-logo-blue), var(--color-logo-pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #e0e0e0;
-  }
-
-  /* SECTION TEMPLATE (for reuse) */
-  .section {
-    padding: 80px 20px;
-    background: #ffffff;
-    text-align: center;
-  }
-
-  .section h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: var(--color-dark);
-  }
-
-  .section p {
-    font-size: 18px;
-    color: #444;
-    max-width: 800px;
-    margin: auto;
-    line-height: 1.6;
-  }
-
-  .cta-button {
-    margin-top: 30px;
-    display: inline-block;
-    padding: 12px 28px;
-    background: var(--color-logo-pink);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-  }
-
-  .cta-button:hover {
-    background: var(--color-logo-orange);
-  }
-
-  footer {
-    padding: 40px 20px;
-    background: var(--color-dark);
-    color: #999;
-    text-align: center;
-    font-size: 14px;
-  }
-
-  @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 2.4rem;
-    }
-
-    .logo-group img {
-      width: 40px;
-      height: 40px;
-    }
-
-    .logo-group span {
-      font-size: 20px;
-    }
-
-    .nav-links {
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .section h2 {
-      font-size: 24px;
-    }
-
-    .section p {
-      font-size: 16px;
-    }
-  }
-</style>
-
-
-<!-- HEADER -->
-<div class="header">
-  <div class="container">
-    <div class="logo-group">
-      <img src="https://neurtext.ct.ws/wp-content/uploads/2025/05/logo-1.png" alt="NeurText logo">
-      <span>NeurText</span>
-    </div>
-    <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="chatbot.html">Gemini Chatbot</a>
-        <a href="semantic-search.html">Semantic Search</a>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="container">
+      <div class="logo-group">
+        <img src="https://neurtext.ct.ws/wp-content/uploads/2025/05/logo-1.png" alt="NeurText logo">
+        <span>NeurText</span>
+      </div>
+      <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="chatbot.html">Gemini Chatbot</a>
+          <a href="semantic-search.html">Semantic Search</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Understanding Language, Semantically.</h1>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Understanding Language, Semantically.</h1>
+      <p>
+        NeurText builds intelligent NLP systems designed to capture meaning, not just keywords.<br>
+        From semantic search to neural APIs — minimal, fast, effective.
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="section" id="about">
+    <h2>What is NeurText?</h2>
     <p>
-      NeurText builds intelligent NLP systems designed to capture meaning, not just keywords.<br>
-      From semantic search to neural APIs — minimal, fast, effective.
+      A portfolio of Natural Language Processing tools with semantic intelligence at their core.<br>
+      Our work spans across deep learning, information retrieval, and language understanding.
     </p>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT SECTION -->
-<section class="section" id="about">
-  <h2>What is NeurText?</h2>
-  <p>
-    A portfolio of Natural Language Processing tools with semantic intelligence at their core.<br>
-    Our work spans across deep learning, information retrieval, and language understanding.
-  </p>
-</section>
+  <!-- PROJECT SECTION -->
+  <section class="section" id="projects">
+    <h2>🧠 Semantic Search Engine</h2>
+    <p>
+      Our flagship tool indexes scientific abstracts and retrieves results based on meaning.<br>
+      It’s powered by sentence embeddings and vector search — accurate, fast, scalable.
+    </p>
+    <a href="semantic-search.html" class="cta-button">Try the Demo</a>
+  </section>
 
-<!-- PROJECT SECTION -->
-<section class="section" id="projects">
-  <h2>🧠 Semantic Search Engine</h2>
-  <p>
-    Our flagship tool indexes scientific abstracts and retrieves results based on meaning.<br>
-    It’s powered by sentence embeddings and vector search — accurate, fast, scalable.
-  </p>
-  <a href="#" class="cta-button">Try the Demo</a>
-</section>
+  <!-- FOOTER -->
+  <footer>
+    © 2025 NeurText — Built with WordPress & FastAPI
+  </footer>
 
-<!-- FOOTER -->
-<footer>
-  © 2025 NeurText — Built with WordPress & FastAPI
-</footer>
+</body>
+</html>

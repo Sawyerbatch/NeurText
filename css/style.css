@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+:root {
+  --color-dark: #0a0a0a;
+  --color-logo-blue: #00f0ff;
+  --color-logo-pink: #ff3baf;
+  --color-logo-orange: #ff7e1a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: #fff;
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background: var(--color-dark);
+  color: #fff;
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-group img {
+  width: 56px;
+  height: 56px;
+}
+
+.logo-group span {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #bbb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-logo-pink);
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  background: url('https://neurtext.ct.ws/wp-content/uploads/2025/05/background.png') no-repeat center top / cover fixed;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.hero-content,
+.hero-overlay {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: auto;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 4.2rem;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, var(--color-logo-blue), var(--color-logo-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+/* Section */
+.section {
+  padding: 80px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: var(--color-dark);
+}
+
+.section p {
+  font-size: 18px;
+  color: #444;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* Inputs e pulsanti */
+input, button {
+  padding: 12px;
+  font-size: 18px;
+  max-width: 600px;
+  width: 80%;
+  margin: 10px auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: var(--color-logo-pink);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--color-logo-orange);
+}
+
+/* Risposte chatbot */
+.response {
+  background: white;
+  color: #16034e;
+  padding: 24px;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-inline: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Risultati semantic search */
+.results {
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--color-logo-blue);
+}
+
+.card p {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+/* Call to action */
+.cta-button {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--color-logo-pink);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--color-logo-orange);
+}
+
+footer {
+  padding: 40px 20px;
+  background: var(--color-dark);
+  color: #999;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .logo-group img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-group span {
+    font-size: 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .section h2 {
+    font-size: 24px;
+  }
+
+  .section p {
+    font-size: 16px;
+  }
+}

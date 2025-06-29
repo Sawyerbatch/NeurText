@@ -14,6 +14,7 @@ app = FastAPI()
 origins = [
     "https://sawyerbatch.github.io",
     "https://sawyerbatch.github.io/NeurText",
+    "https://sawyerbatch.github.io/NeurText/semantic-search.html",
     "http://localhost:5500",
     "http://127.0.0.1:5500"
 ]
